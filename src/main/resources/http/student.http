@@ -13,3 +13,6 @@ Content-Type: application/json
 ### Student list
 GET localhost:8080/student/list
 Content-Type: application/json
+### Student getById
+GET localhost:8080/student/get/1
+Content-Type: application/json

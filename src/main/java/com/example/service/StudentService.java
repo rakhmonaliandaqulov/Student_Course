@@ -3,12 +3,14 @@ package com.example.service;
 import com.example.dto.StudentDto;
 import com.example.entity.StudentEntity;
 import com.example.enums.StudentGender;
+import com.example.exp.AppBadRequestException;
 import com.example.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -45,5 +47,27 @@ public class StudentService {
             dtoList.add(dto);
         });
         return dtoList;
+    }
+    public StudentDto getById(Integer id) {
+        StudentEntity entity = get(id);
+
+        StudentDto dto = new StudentDto();
+        dto.setId(entity.getId());
+        dto.setName(entity.getName());
+        dto.setSurname(entity.getSurname());
+        dto.setAge(entity.getAge());
+        dto.setLevel(entity.getLevel());
+        dto.setBirthDate(entity.getBirthDate());
+        dto.setGender(entity.getGender());
+
+        studentRepository.save(entity);
+        return dto;
+    }
+    public StudentEntity get(Integer id) {
+        Optional<StudentEntity> optional = studentRepository.findById(id);
+        if (optional == null) {
+            throw new AppBadRequestException("Student not found: " + id);
+        }
+        return optional.get();
     }
 }

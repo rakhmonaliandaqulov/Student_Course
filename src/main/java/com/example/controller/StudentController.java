@@ -28,4 +28,8 @@ public class StudentController {
 //        List<StudentDto> list = studentService.getAll();
         return ResponseEntity.ok(studentService.getAll());
     }
+    @GetMapping(value = "/get/{id}")
+    public ResponseEntity<?> getById(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok(studentService.getById(id));
+    }
 }

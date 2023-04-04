@@ -22,8 +22,14 @@ public class CourseController {
         CourseDto response = courseService.create(courseDto);
         return ResponseEntity.ok(response);
     }
+
     @GetMapping(value = "/list")
     public ResponseEntity<List<CourseDto>> getAll() {
         return ResponseEntity.ok(courseService.getAll());
+    }
+
+    @GetMapping(value = "/get/{id}")
+    public ResponseEntity<?> getById(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok(courseService.getById(id));
     }
 }

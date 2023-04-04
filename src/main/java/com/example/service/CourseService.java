@@ -4,12 +4,14 @@ import com.example.dto.CourseDto;
 import com.example.dto.StudentDto;
 import com.example.entity.CourseEntity;
 import com.example.entity.StudentEntity;
+import com.example.exp.AppBadRequestException;
 import com.example.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CourseService {
@@ -44,5 +46,26 @@ public class CourseService {
         });
         return dtoList;
 
+    }
+
+    public CourseDto getById(Integer id) {
+        CourseEntity entity = get(id);
+
+        CourseDto dto = new CourseDto();
+        dto.setId(entity.getId());
+        dto.setName(entity.getName());
+        dto.setPrice(entity.getPrice());
+        dto.setDuration(entity.getDuration());
+        dto.setCreatedDate(entity.getCreatedDate());
+
+        courseRepository.save(entity);
+        return dto;
+    }
+    public CourseEntity get(Integer id) {
+        Optional<CourseEntity> optional = courseRepository.findById(id);
+        if (optional == null) {
+            throw new AppBadRequestException("Student not found: " + id);
+        }
+        return optional.get();
     }
 }

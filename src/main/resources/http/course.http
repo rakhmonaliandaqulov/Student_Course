@@ -11,3 +11,6 @@ Content-Type: application/json
 ### Course list
 GET localhost:8080/course/list
 Content-Type: application/json
+### Course getById
+GET localhost:8080/course/get/2
+Content-Type: application/json
