@@ -38,4 +38,9 @@ public class CourseController {
                                               @RequestBody CourseDto courseDto) {
         return ResponseEntity.ok(courseService.updateById(id, courseDto));
     }
+
+    @DeleteMapping(value = "/delete/{id}")
+    public ResponseEntity<Boolean> deleteById(@PathVariable ("id") Integer id) {
+        return ResponseEntity.ok(courseService.deleteById(id));
+    }
 }

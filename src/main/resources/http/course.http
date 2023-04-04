@@ -3,17 +3,20 @@ POST localhost:8080/course/create
 Content-Type: application/json
 
 {
-  "name": "Java",
-  "price": 1000.0,
-  "duration": "9 oy",
-  "createdDate": "2022-09-10"
+  "name": "IELTS",
+  "price": 750.0,
+  "duration": "18 oy",
+  "createdDate": "2022-09-26"
 }
+
 ### Course list
 GET localhost:8080/course/list
 Content-Type: application/json
+
 ### Course getById
 GET localhost:8080/course/get/2
 Content-Type: application/json
+
 ### Course update
 PUT localhost:8080/course/update/1
 Content-Type: application/json
@@ -24,3 +27,6 @@ Content-Type: application/json
   "duration": "3 oy",
   "createdDate": "2019-09-10"
 }
+
+### Course delete
+DELETE localhost:8080/course/delete/1

@@ -82,4 +82,14 @@ public class StudentService {
         studentRepository.save(entity);
         return true;
     }
+
+    public Boolean deleteById(Integer id) {
+        StudentEntity entity = get(id);
+
+        if (entity == null) {
+            throw new AppBadRequestException("Student not found: " + id);
+        }
+        studentRepository.delete(entity);
+        return true;
+    }
 }

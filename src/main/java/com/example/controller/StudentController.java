@@ -40,4 +40,9 @@ public class StudentController {
                                               @RequestBody StudentDto studentDto) {
         return ResponseEntity.ok(studentService.updateById(id, studentDto));
     }
+
+    @DeleteMapping(value = "/delete/{id}")
+    public ResponseEntity<Boolean> deleteById(@PathVariable ("id") Integer id) {
+        return ResponseEntity.ok(studentService.deleteById(id));
+    }
 }

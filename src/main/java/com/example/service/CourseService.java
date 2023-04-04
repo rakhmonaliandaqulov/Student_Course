@@ -28,29 +28,20 @@ public class CourseService {
         dto.setId(entity.getId());
         return dto;
     }
-
     public List<CourseDto> getAll() {
         Iterable<CourseEntity> iterable = courseRepository.findAll();
 
         List<CourseDto> dtoList = new LinkedList<>();
 
-        iterable.forEach(courseEntity -> {
-            CourseDto dto = new CourseDto();
-            dto.setId(courseEntity.getId());
-            dto.setName(courseEntity.getName());
-            dto.setPrice(courseEntity.getPrice());
-            dto.setDuration(courseEntity.getDuration());
-            dto.setCreatedDate(courseEntity.getCreatedDate());
-
-            dtoList.add(dto);
-        });
+        iterable.forEach(entity -> dtoList.add(toDTO(entity)));
         return dtoList;
 
     }
-
     public CourseDto getById(Integer id) {
         CourseEntity entity = get(id);
-
+        return toDTO(entity);
+    }
+    public CourseDto toDTO(CourseEntity entity){
         CourseDto dto = new CourseDto();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
@@ -58,7 +49,6 @@ public class CourseService {
         dto.setDuration(entity.getDuration());
         dto.setCreatedDate(entity.getCreatedDate());
 
-        courseRepository.save(entity);
         return dto;
     }
     public CourseEntity get(Integer id) {
@@ -68,7 +58,6 @@ public class CourseService {
         }
         return optional.get();
     }
-
     public Boolean updateById(Integer id, CourseDto courseDto) {
        CourseEntity entity = get(id);
 
@@ -82,6 +71,15 @@ public class CourseService {
         entity.setCreatedDate(courseDto.getCreatedDate());
 
         courseRepository.save(entity);
+        return true;
+    }
+    public Boolean deleteById(Integer id) {
+        CourseEntity entity = get(id);
+
+        if (entity == null) {
+            throw new AppBadRequestException("Student not found: " + id);
+        }
+        courseRepository.delete(entity);
         return true;
     }
 }
