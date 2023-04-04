@@ -82,4 +82,53 @@ public class CourseService {
         courseRepository.delete(entity);
         return true;
     }
+
+    public CourseDto getByName(String name) {
+        CourseEntity entity = getN(name);
+        if(entity == null) {
+            throw new AppBadRequestException("No course found with this name: " + name);
+        }
+        return toDTO(entity);
+    }
+
+    private CourseEntity getN(String name) {
+        Optional<CourseEntity> optional = courseRepository.findByName(name);
+        if (optional.isEmpty()) {
+            throw new AppBadRequestException("No course found with this name: " + name);
+        }
+        return optional.get();
+    }
+
+    public CourseDto getByPrice(Double price) {
+        CourseEntity entity = getP(price);
+        if (entity == null) {
+            throw new AppBadRequestException("No course found with this name: " + price);
+        }
+        return toDTO(entity);
+    }
+
+    private CourseEntity getP(Double price) {
+        Optional<CourseEntity> optional = courseRepository.findByPrice(price);
+        if (optional.isEmpty()) {
+            throw new AppBadRequestException("No course found with this price: " + price);
+        }
+        return optional.get();
+    }
+
+
+    public CourseDto getByDuration(String duration) {
+        CourseEntity entity = getD(duration);
+        if (entity == null) {
+            throw new AppBadRequestException("No course found with this duration: " + duration);
+        }
+        return toDTO(entity);
+    }
+
+    private CourseEntity getD(String duration) {
+        Optional<CourseEntity> optional = courseRepository.findByDuration(duration);
+        if (optional.isEmpty()) {
+            throw new AppBadRequestException("No course found with this duration: " + duration);
+        }
+        return optional.get();
+    }
 }

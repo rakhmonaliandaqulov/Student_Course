@@ -3,11 +3,11 @@ POST localhost:8080/student/create
 Content-Type: application/json
 
 {
-  "name": "Aliyosha",
-  "surname": "Alishjonova",
-  "age": 33,
-  "birthDate": "1983-01-19",
-  "level": 1,
+  "name": "Aliya",
+  "surname": "Aliyov",
+  "age": 24,
+  "birthDate": "1999-08-31",
+  "level": 7,
   "gender": "FEMALE"
 }
 ### Student list
@@ -33,3 +33,18 @@ Content-Type: application/json
 
 ### Student delete
 DELETE localhost:8080/student/delete/4
+
+### Studen getByName
+GET localhost:8080/student/getByName/Eshmat
+
+### Studen getBySurame
+GET localhost:8080/student/getBySurname/Sadirev
+
+### Studen getByLevel
+GET localhost:8080/student/getByLevel/1
+
+### Studen getByAge
+GET localhost:8080/student/getByAge/24
+
+### Studen getByGender
+GET localhost:8080/student/getByGender/FEMALE

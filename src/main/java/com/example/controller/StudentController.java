@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.dto.StudentDto;
 import com.example.dto.StudentUpdateDTO;
 import com.example.entity.StudentEntity;
+import com.example.enums.StudentGender;
 import com.example.repository.StudentRepository;
 import com.example.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,30 @@ public class StudentController {
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Boolean> deleteById(@PathVariable ("id") Integer id) {
         return ResponseEntity.ok(studentService.deleteById(id));
+    }
+
+    @GetMapping(value = "/getByName/{name}")
+    public ResponseEntity<?> getByName(@PathVariable ("name") String name) {
+        return ResponseEntity.ok(studentService.getByName(name));
+    }
+
+    @GetMapping(value = "/getBySurname/{surname}")
+    public ResponseEntity<?> getBySurname(@PathVariable ("surname") String surname) {
+        return ResponseEntity.ok(studentService.getBySurname(surname));
+    }
+
+    @GetMapping(value = "/getByLevel/{level}")
+    public ResponseEntity<?> getByLevel(@PathVariable ("level") Integer level) {
+        return ResponseEntity.ok(studentService.getByLevel(level));
+    }
+
+    @GetMapping(value = "/getByAge/{age}")
+    public ResponseEntity<?> getByAge(@PathVariable ("age") Integer age) {
+        return ResponseEntity.ok(studentService.getByAge(age));
+    }
+
+    @GetMapping(value = "/getByGender/{gender}")
+    public ResponseEntity<?> getByGender(@PathVariable ("gender") String gender) {
+        return ResponseEntity.ok(studentService.getByGender(gender));
     }
 }

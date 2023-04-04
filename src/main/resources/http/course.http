@@ -30,3 +30,12 @@ Content-Type: application/json
 
 ### Course delete
 DELETE localhost:8080/course/delete/1
+
+### Course getByName
+GET localhost:8080/course/getByName/Java
+
+### Course getByPrice
+GET localhost:8080/course/getByPrice/750
+
+### Course getByName
+GET localhost:8080/course/getByDuration/18 oy

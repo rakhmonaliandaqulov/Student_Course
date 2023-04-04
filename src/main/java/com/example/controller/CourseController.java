@@ -43,4 +43,20 @@ public class CourseController {
     public ResponseEntity<Boolean> deleteById(@PathVariable ("id") Integer id) {
         return ResponseEntity.ok(courseService.deleteById(id));
     }
+
+    @GetMapping(value = "/getByName/{name}")
+    public ResponseEntity<?> getByName(@PathVariable ("name") String name) {
+        return ResponseEntity.ok(courseService.getByName(name));
+    }
+
+    @GetMapping(value = "/getByPrice/{price}")
+    public ResponseEntity<?> getByPrice(@PathVariable ("price") Double price) {
+        return ResponseEntity.ok(courseService.getByPrice(price));
+    }
+
+    @GetMapping(value = "/getByDuration/{duration}")
+    public ResponseEntity<?> getByDuration(@PathVariable ("duration") String duration) {
+        return ResponseEntity.ok(courseService.getByDuration(duration));
+    }
+
 }
