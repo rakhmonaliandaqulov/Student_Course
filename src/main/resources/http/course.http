@@ -1,9 +1,13 @@
+### Course create
 POST localhost:8080/course/create
 Content-Type: application/json
 
 {
-  "name": "Java",
+  "name": "HTML",
   "price": 100.0,
-  "duration": "9 oy",
-  "createdDate": "2022-09-10"
+  "duration": "8 oy",
+  "createdDate": "2020-09-10"
 }
+### Course list
+GET localhost:8080/course/list
+Content-Type: application/json

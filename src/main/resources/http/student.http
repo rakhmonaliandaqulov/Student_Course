@@ -3,12 +3,13 @@ POST localhost:8080/student/create
 Content-Type: application/json
 
 {
-  "name": "Valisha",
-  "surname": "Valisheva",
-  "age": 21,
-  "birthDate": "1997-12-12",
-  "level": 6,
-  "gender": "FEMALE"
+  "name": "Valish",
+  "surname": "Valishev",
+  "age": 20,
+  "birthDate": "1998-12-12",
+  "level": 2,
+  "gender": "MALE"
 }
 ### Student list
 GET localhost:8080/student/list
+Content-Type: application/json

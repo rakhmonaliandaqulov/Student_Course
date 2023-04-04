@@ -6,10 +6,9 @@ import com.example.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RestController
@@ -20,7 +19,11 @@ public class CourseController {
 
     @PostMapping(value = "/create")
     public ResponseEntity<?> create(@RequestBody CourseDto courseDto) {
-        CourseDto response = courseService.crate(courseDto);
+        CourseDto response = courseService.create(courseDto);
         return ResponseEntity.ok(response);
+    }
+    @GetMapping(value = "/list")
+    public ResponseEntity<List<CourseDto>> getAll() {
+        return ResponseEntity.ok(courseService.getAll());
     }
 }
