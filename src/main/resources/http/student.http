@@ -13,6 +13,20 @@ Content-Type: application/json
 ### Student list
 GET localhost:8080/student/list
 Content-Type: application/json
+
 ### Student getById
 GET localhost:8080/student/get/1
 Content-Type: application/json
+
+### Student updateByid
+PUT localhost:8080/student/update/1
+Content-Type: application/json
+
+{
+ "name": "Alish",
+  "surname": "Sadirev",
+  "age": 20,
+  "birthDate": "2000-12-12",
+  "level": 2,
+  "gender": "MALE"
+}

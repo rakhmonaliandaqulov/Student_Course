@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.dto.StudentDto;
+import com.example.dto.StudentUpdateDTO;
 import com.example.entity.StudentEntity;
 import com.example.repository.StudentRepository;
 import com.example.service.StudentService;
@@ -20,16 +21,23 @@ public class StudentController {
     private StudentService studentService;
     @PostMapping(value = "/create")
     public ResponseEntity<?> create(@RequestBody StudentDto studentDto) {
-        StudentDto response = studentService.create(studentDto);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(studentService.create(studentDto));
     }
+
     @GetMapping(value = "/list")
     public ResponseEntity<List<StudentDto>> getAll() {
 //        List<StudentDto> list = studentService.getAll();
         return ResponseEntity.ok(studentService.getAll());
     }
+
     @GetMapping(value = "/get/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Integer id) {
         return ResponseEntity.ok(studentService.getById(id));
+    }
+
+    @PutMapping(value = "/update/{id}")
+    public ResponseEntity<Boolean> updateById(@PathVariable ("id") Integer id,
+                                              @RequestBody StudentDto studentDto) {
+        return ResponseEntity.ok(studentService.updateById(id, studentDto));
     }
 }

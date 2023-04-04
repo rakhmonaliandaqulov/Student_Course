@@ -63,9 +63,25 @@ public class CourseService {
     }
     public CourseEntity get(Integer id) {
         Optional<CourseEntity> optional = courseRepository.findById(id);
-        if (optional == null) {
-            throw new AppBadRequestException("Student not found: " + id);
+        if (optional.isEmpty()) {
+            throw new AppBadRequestException("Course not found: " + id);
         }
         return optional.get();
+    }
+
+    public Boolean updateById(Integer id, CourseDto courseDto) {
+       CourseEntity entity = get(id);
+
+        if (entity == null) {
+            throw new AppBadRequestException("Student not found: " + id);
+        }
+
+        entity.setName(courseDto.getName());
+        entity.setPrice(courseDto.getPrice());
+        entity.setDuration(courseDto.getDuration());
+        entity.setCreatedDate(courseDto.getCreatedDate());
+
+        courseRepository.save(entity);
+        return true;
     }
 }

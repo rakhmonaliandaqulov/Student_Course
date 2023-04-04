@@ -32,4 +32,10 @@ public class CourseController {
     public ResponseEntity<?> getById(@PathVariable("id") Integer id) {
         return ResponseEntity.ok(courseService.getById(id));
     }
+
+    @PutMapping(value = "/update/{id}")
+    public ResponseEntity<Boolean> updateById(@PathVariable ("id") Integer id,
+                                              @RequestBody CourseDto courseDto) {
+        return ResponseEntity.ok(courseService.updateById(id, courseDto));
+    }
 }

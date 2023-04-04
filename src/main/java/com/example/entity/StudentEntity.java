@@ -15,17 +15,23 @@ public class StudentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @Column(name = "name", nullable = false)
     private String name;
+
     @Column(name = "surname")
     private String surname;
+
     @Column(name = "level", nullable = false)
     private Integer level;
+
     @Column(name = "age")
     private Integer age;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "gender")
-    private StudentGender gender = StudentGender.FEMALE;
+    private StudentGender gender;
+
     @Column(name = "birth_date")
     private LocalDate birthDate;
 }
