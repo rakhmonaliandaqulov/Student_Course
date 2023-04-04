@@ -14,5 +14,5 @@ public class StudentDto {
     private Integer level;
     private Integer age;
     private StudentGender gender;
-    private LocalDate birthDAte;
+    private LocalDate birthDate;
 }

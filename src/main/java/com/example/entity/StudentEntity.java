@@ -23,8 +23,9 @@ public class StudentEntity {
     private Integer level;
     @Column(name = "age")
     private Integer age;
+    @Enumerated(EnumType.STRING)
     @Column(name = "gender", nullable = false)
-    private StudentGender gender;
+    private StudentGender gender = StudentGender.FEMALE;
     @Column(name = "birth_date")
     private LocalDate birthDate;
 }
