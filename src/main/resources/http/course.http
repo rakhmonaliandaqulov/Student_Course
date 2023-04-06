@@ -3,9 +3,9 @@ POST localhost:8080/course/create
 Content-Type: application/json
 
 {
-  "name": "IELTS",
+  "name": "Fizika",
   "price": 750.0,
-  "duration": "18 oy",
+  "duration": "10 oy",
   "createdDate": "2022-09-26"
 }
 
@@ -18,18 +18,18 @@ GET localhost:8080/course/get/2
 Content-Type: application/json
 
 ### Course update
-PUT localhost:8080/course/update/1
+PUT localhost:8080/course/update/5
 Content-Type: application/json
 
 {
-  "name": "CSS",
+  "name": "HTML",
   "price": 200.0,
   "duration": "3 oy",
   "createdDate": "2019-09-10"
 }
 
 ### Course delete
-DELETE localhost:8080/course/delete/1
+DELETE localhost:8080/course/delete/3
 
 ### Course getByName
 GET localhost:8080/course/getByName/Java
@@ -37,5 +37,5 @@ GET localhost:8080/course/getByName/Java
 ### Course getByPrice
 GET localhost:8080/course/getByPrice/750
 
-### Course getByName
-GET localhost:8080/course/getByDuration/18 oy
+### Course getByDuration
+GET localhost:8080/course/getByDuration/3 oy

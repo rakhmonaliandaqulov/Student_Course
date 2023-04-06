@@ -36,15 +36,23 @@ public class StudentService {
         Iterable<StudentEntity> iterable = studentRepository.findAll();
         List<StudentDto> dtoList = new LinkedList<>();
 
-        iterable.forEach(entity -> dtoList.add(toDTO(entity)));
+        for (StudentEntity entity : iterable) {
+            StudentDto dto = new StudentDto();
+            dto.setId(entity.getId());
+            dto.setName(entity.getName());
+            dto.setSurname(entity.getSurname());
+            dto.setAge(entity.getAge());
+            dto.setLevel(entity.getLevel());
+            dto.setBirthDate(entity.getBirthDate());
+            dto.setGender(entity.getGender());
+
+            dtoList.add(dto);
+        };
         return dtoList;
     }
 
     public StudentDto getById(Integer id) {
         StudentEntity entity = get(id);
-        return toDTO(entity);
-    }
-    public StudentDto toDTO(StudentEntity entity){
         StudentDto dto = new StudentDto();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
@@ -53,8 +61,22 @@ public class StudentService {
         dto.setLevel(entity.getLevel());
         dto.setBirthDate(entity.getBirthDate());
         dto.setGender(entity.getGender());
-
         return dto;
+    }
+    public List<StudentDto> toDTO(List<StudentEntity> list){
+        List<StudentDto> dtos = new LinkedList<>();
+        for(StudentEntity entity : list){
+        StudentDto dto = new StudentDto();
+        dto.setId(entity.getId());
+        dto.setName(entity.getName());
+        dto.setSurname(entity.getSurname());
+        dto.setAge(entity.getAge());
+        dto.setLevel(entity.getLevel());
+        dto.setBirthDate(entity.getBirthDate());
+        dto.setGender(entity.getGender());
+        dtos.add(dto);
+        }
+        return dtos;
     }
     public StudentEntity get(Integer id) {
         Optional<StudentEntity> optional = studentRepository.findById(id);
@@ -63,7 +85,6 @@ public class StudentService {
         }
         return optional.get();
     }
-
     public Boolean updateById(Integer id, StudentDto studentDto) {
         StudentEntity entity = get(id);
 
@@ -81,7 +102,6 @@ public class StudentService {
         studentRepository.save(entity);
         return true;
     }
-
     public Boolean deleteById(Integer id) {
         StudentEntity entity = get(id);
 
@@ -92,84 +112,46 @@ public class StudentService {
         return true;
     }
 
-    public StudentDto getByName(String name) {
-        StudentEntity entity = get(name);
-
-        if (entity == null) {
+    public List<StudentDto> getByName(String name) {
+        List<StudentEntity> list = studentRepository.findByName(name);
+        if (list.isEmpty()) {
             throw new AppBadRequestException("No student with this name was found: " + name);
         }
-        return toDTO(entity);
+        return toDTO(list);
     }
-    public StudentEntity get(String name) {
-        Optional<StudentEntity> optional = studentRepository.findByName(name);
-        if (optional.isEmpty()) {
-            throw new AppBadRequestException("No student with this name was found: " + name);
-        }
-        return optional.get();
-    }
-
-    public StudentDto getBySurname(String surname) {
-        StudentEntity entity = getS(surname);
-        if (entity == null) {
+    public List<StudentDto> getBySurname(String surname) {
+        List<StudentEntity> list = studentRepository.findBySurname(surname);
+        if (list.isEmpty()) {
             throw new AppBadRequestException("No student with this surname was found: " + surname);
         }
-        return toDTO(entity);
+        return toDTO(list);
     }
-    public StudentEntity getS(String surname) {
-        Optional<StudentEntity> optional = studentRepository.findBySurname(surname);
-        if (optional.isEmpty()) {
-            throw new AppBadRequestException("No student with this surname was found: " + surname);
-        }
-        return optional.get();
-    }
-
-    public StudentDto getByLevel(Integer level) {
-        StudentEntity entity = getL(level);
-        if(entity == null) {
-            throw new AppBadRequestException("No student with this level was found " + level);
-        }
-        return toDTO(entity);
-    }
-    private StudentEntity getL(Integer level) {
-        Optional<StudentEntity> optional = studentRepository.findByLevel(level);
-        if (optional.isEmpty()) {
+    public List<StudentDto> getByLevel(Integer level) {
+        List<StudentEntity> list = studentRepository.findByLevel(level);
+        if (list.isEmpty()) {
             throw new AppBadRequestException("No student with this level was found: " + level);
         }
-        return optional.get();
+        return toDTO(list);
     }
-
-    public StudentDto getByAge(Integer age) {
-        StudentEntity entity = getA(age);
-        if (entity == null) {
+    public List<StudentDto> getByAge(Integer age) {
+        List<StudentEntity> list = studentRepository.findByAge(age);
+        if (list.isEmpty()) {
             throw new AppBadRequestException("No student with this age was found: " + age);
         }
-        return toDTO(entity);
+        return toDTO(list);
     }
-    private StudentEntity getA(Integer age) {
-        Optional<StudentEntity> optional = studentRepository.findByAge(age);
-        if (optional.isEmpty()) {
-            throw new AppBadRequestException("No student with this age was found: " + age);
-        }
-        return optional.get();
-    }
-
-    public StudentDto getByGender(String gender) {
-        StudentEntity entity = getG(gender);
-        if (entity == null) {
+    public List<StudentDto> getByGender(String gender) {
+        List<StudentEntity> list = studentRepository.findByGender(StudentGender.valueOf(gender));
+        if (list.isEmpty()) {
             throw new AppBadRequestException("No student with this gender was found: " + gender);
         }
-        return toDTO(entity);
-
+        return toDTO(list);
     }
-    private StudentEntity getG(String gender) {
-        Optional<StudentEntity> optional = studentRepository.findByGender(gender);
-        if (optional.isEmpty()) {
-            throw new AppBadRequestException("No student with this gender was found: " + gender);
+    public List<StudentDto> getByDate(LocalDate date) {
+        List<StudentEntity> list = studentRepository.findByBirthDate(date);
+        if (list.isEmpty()){
+            throw new AppBadRequestException("No student with this gender was found: " + date);
         }
-        return optional.get();
-    }
-
-    public StudentDto getByGivenDate(LocalDate date) {
-        return null;
+        return toDTO(list);
     }
 }

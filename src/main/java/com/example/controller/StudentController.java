@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@Controller
 @RestController
 @RequestMapping(value = "/student")
 public class StudentController {
@@ -28,7 +27,7 @@ public class StudentController {
 
     @GetMapping(value = "/list")
     public ResponseEntity<List<StudentDto>> getAll() {
-//        List<StudentDto> list = studentService.getAll();
+       List<StudentDto> list = studentService.getAll();
         return ResponseEntity.ok(studentService.getAll());
     }
 
@@ -75,10 +74,11 @@ public class StudentController {
 
     @GetMapping(value = "/getByGivenDate/{date}")
     public ResponseEntity<?> getByGivenDate(@PathVariable ("date") LocalDate date) {
-        return ResponseEntity.ok(studentService.getByGivenDate(date));
+        List<StudentDto> list = studentService.getByDate(date);
+        return ResponseEntity.ok(list);
     }
 
-   /* @GetMapping(value = "/getByGivenDateBetween/{date1}/{date2}")
+    /*@GetMapping(value = "/getByGivenDateBetween/{date1}/{date2}")
     public ResponseEntity<?> getByGivenDateBetween(@PathVariable ("date1") ("date2") LocalDate date, LocalDate date) {
         return ResponseEntity.ok(studentService.getByGivenDateBetween(gender));
     }*/

@@ -6,6 +6,7 @@ import com.example.entity.CourseEntity;
 import com.example.entity.StudentEntity;
 import com.example.exp.AppBadRequestException;
 import com.example.repository.CourseRepository;
+import org.hibernate.resource.transaction.backend.jdbc.spi.JdbcResourceTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,26 +31,40 @@ public class CourseService {
     }
     public List<CourseDto> getAll() {
         Iterable<CourseEntity> iterable = courseRepository.findAll();
-
         List<CourseDto> dtoList = new LinkedList<>();
-
-        iterable.forEach(entity -> dtoList.add(toDTO(entity)));
+        iterable.forEach(entity -> {
+            CourseDto dto = new CourseDto();
+            dto.setId(entity.getId());
+            dto.setName(entity.getName());
+            dto.setPrice(entity.getPrice());
+            dto.setDuration(entity.getDuration());
+            dto.setCreatedDate(entity.getCreatedDate());
+            dtoList.add(dto);
+        });
         return dtoList;
-
     }
     public CourseDto getById(Integer id) {
         CourseEntity entity = get(id);
-        return toDTO(entity);
-    }
-    public CourseDto toDTO(CourseEntity entity){
         CourseDto dto = new CourseDto();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setPrice(entity.getPrice());
         dto.setDuration(entity.getDuration());
         dto.setCreatedDate(entity.getCreatedDate());
-
         return dto;
+    }
+    public List<CourseDto> toDTO(List<CourseEntity> entityList){
+        List<CourseDto> dtoList = new LinkedList<>();
+        for (CourseEntity entity : entityList) {
+        CourseDto dto = new CourseDto();
+        dto.setId(entity.getId());
+        dto.setName(entity.getName());
+        dto.setPrice(entity.getPrice());
+        dto.setDuration(entity.getDuration());
+        dto.setCreatedDate(entity.getCreatedDate());
+        dtoList.add(dto);
+        }
+        return dtoList;
     }
     public CourseEntity get(Integer id) {
         Optional<CourseEntity> optional = courseRepository.findById(id);
@@ -83,52 +98,25 @@ public class CourseService {
         return true;
     }
 
-    public CourseDto getByName(String name) {
-        CourseEntity entity = getN(name);
-        if(entity == null) {
+    public List<CourseDto> getByName(String name) {
+        List<CourseEntity> list = courseRepository.findByName(name);
+        if (list.isEmpty()) {
             throw new AppBadRequestException("No course found with this name: " + name);
         }
-        return toDTO(entity);
+        return toDTO(list);
     }
-
-    private CourseEntity getN(String name) {
-        Optional<CourseEntity> optional = courseRepository.findByName(name);
-        if (optional.isEmpty()) {
-            throw new AppBadRequestException("No course found with this name: " + name);
-        }
-        return optional.get();
-    }
-
-    public CourseDto getByPrice(Double price) {
-        CourseEntity entity = getP(price);
-        if (entity == null) {
-            throw new AppBadRequestException("No course found with this name: " + price);
-        }
-        return toDTO(entity);
-    }
-
-    private CourseEntity getP(Double price) {
-        Optional<CourseEntity> optional = courseRepository.findByPrice(price);
-        if (optional.isEmpty()) {
+    public List<CourseDto> getByPrice(Double price) {
+        List<CourseEntity> list = courseRepository.findByPrice(price);
+        if (list.isEmpty()) {
             throw new AppBadRequestException("No course found with this price: " + price);
         }
-        return optional.get();
+        return toDTO(list);
     }
-
-
-    public CourseDto getByDuration(String duration) {
-        CourseEntity entity = getD(duration);
-        if (entity == null) {
+    public List<CourseDto> getByDuration(String duration) {
+        List<CourseEntity> list = courseRepository.findByDuration(duration);
+        if (list.isEmpty()) {
             throw new AppBadRequestException("No course found with this duration: " + duration);
         }
-        return toDTO(entity);
-    }
-
-    private CourseEntity getD(String duration) {
-        Optional<CourseEntity> optional = courseRepository.findByDuration(duration);
-        if (optional.isEmpty()) {
-            throw new AppBadRequestException("No course found with this duration: " + duration);
-        }
-        return optional.get();
+        return toDTO(list);
     }
 }

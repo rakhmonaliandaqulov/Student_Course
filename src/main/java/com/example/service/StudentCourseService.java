@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class StudentCourseService {
     private StudentCourseRepository studentCourseRepository;
-    public StudentCourseDto create(StudentCourseDto dto) {
+    /*public StudentCourseDto create(StudentCourseDto dto) {
         StudentCourseEntity entity = new StudentCourseEntity();
         entity.setStudentId(dto.getStudentId());
         entity.setCourseId(dto.getCourseId());
@@ -17,5 +17,5 @@ public class StudentCourseService {
 
         studentCourseRepository.save(entity);
         return entity.getId();
-    }
+    }*/
 }

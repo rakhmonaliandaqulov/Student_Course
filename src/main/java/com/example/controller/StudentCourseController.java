@@ -13,8 +13,8 @@ public class StudentCourseController {
     @Autowired
     private StudentCourseService studentCourseService;
 
-    @PostMapping(value = "/crerate")
+    /*@PostMapping(value = "/crerate")
     public ResponseEntity<?> create(@RequestBody StudentCourseDto studentCourseDto) {
         return ResponseEntity.ok(studentCourseService.create(studentCourseDto));
-    }
+    }*/
 }

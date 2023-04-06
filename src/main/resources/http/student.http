@@ -3,22 +3,22 @@ POST localhost:8080/student/create
 Content-Type: application/json
 
 {
-  "name": "Aliya",
-  "surname": "Aliyov",
-  "age": 24,
+  "name": "trhgf",
+  "surname": "dfbf",
+  "age": 20,
   "birthDate": "1999-08-31",
   "level": 7,
-  "gender": "FEMALE"
+  "gender": "MALE"
 }
 ### Student list
 GET localhost:8080/student/list
 Content-Type: application/json
 
 ### Student getById
-GET localhost:8080/student/get/3
+GET localhost:8080/student/get/7
 Content-Type: application/json
 
-### Student updateByid
+### Student updateById
 PUT localhost:8080/student/update/1
 Content-Type: application/json
 
@@ -32,19 +32,25 @@ Content-Type: application/json
 }
 
 ### Student delete
-DELETE localhost:8080/student/delete/4
+DELETE localhost:8080/student/delete/7
 
-### Studen getByName
-GET localhost:8080/student/getByName/Eshmat
+### Student getByName
+GET localhost:8080/student/getByName/Aliya
 
-### Studen getBySurame
+### Student getBySurame
 GET localhost:8080/student/getBySurname/Sadirev
 
-### Studen getByLevel
-GET localhost:8080/student/getByLevel/1
+### Student getByLevel
+GET localhost:8080/student/getByLevel/2
 
-### Studen getByAge
-GET localhost:8080/student/getByAge/24
+### Student getByAge
+GET localhost:8080/student/getByAge/20
 
-### Studen getByGender
-GET localhost:8080/student/getByGender/FEMALE
+### Student getByGender
+GET localhost:8080/student/getByGender/MALE
+
+### Student getByGender
+GET localhost:8080/student/getByGivenDate/2000-12-12
+
+### Student getByGender
+GET localhost:8080/student/getByGivenDate/2000-12-12
