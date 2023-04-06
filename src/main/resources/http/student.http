@@ -52,5 +52,8 @@ GET localhost:8080/student/getByGender/MALE
 ### Student getByGender
 GET localhost:8080/student/getByGivenDate/2000-12-12
 
-### Student getByGender
+### Student getByDate
 GET localhost:8080/student/getByGivenDate/2000-12-12
+
+### Student getByBirthDateBetween
+GET localhost:8080/student/getByBirthDateBetween/1990-01-01/2000-12-12

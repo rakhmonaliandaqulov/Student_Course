@@ -39,3 +39,9 @@ GET localhost:8080/course/getByPrice/750
 
 ### Course getByDuration
 GET localhost:8080/course/getByDuration/3 oy
+
+### Course getByListPriceBetween
+GET localhost:8080/course/getCourseListPriceBetween/0.0/1000.0
+
+### Course getByListCrreatedDateBetween
+GET localhost:8080/course/getCourseListCreatedDatesBetween/2012-01-01/2024-12-12

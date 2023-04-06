@@ -12,10 +12,8 @@ public interface StudentRepository extends CrudRepository<StudentEntity, Integer
     List<StudentEntity> findBySurname(String surname);
     List<StudentEntity> findByLevel(Integer level);
     List<StudentEntity> findByAge(Integer age);
-
     List<StudentEntity> findByBirthDate(LocalDate date);
-
     List<StudentEntity> findByName(String name);
-
     List<StudentEntity> findByGender(StudentGender gender);
+    List<StudentEntity> findByBirthDateBetween(LocalDate date1, LocalDate date2);
 }

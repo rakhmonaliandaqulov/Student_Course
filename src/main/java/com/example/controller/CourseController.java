@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -60,14 +61,16 @@ public class CourseController {
         return ResponseEntity.ok(courseService.getByDuration(duration));
     }
 
-    /*@GetMapping(value = "/getCourseListPriceBetween/{ptices}/{prices}")
-    public ResponseEntity<?> getCourseListPriceBetween(@PathVariable {"price"}, {"price"} Double price) {
-        return ResponseEntity.ok(courseService.getByCourseListPriceBetween(price, price));
-    }*/
+    @GetMapping(value = "/getCourseListPriceBetween/{price1}/{price2}")
+    public ResponseEntity<?> getCourseListPriceBetween(@PathVariable ("price1") Double price1,
+                                                       @PathVariable ("price2") Double price2) {
+        return ResponseEntity.ok(courseService.getByCourseListPriceBetween(price1, price2));
+    }
 
-    /*@GetMapping(value = "/getCourseListCreatedDatesBetween/{date}/{date}")
-    public ResponseEntity<?> getCourseListCreatedDateBetween(@PathVariable {"date"}, {"date"} LocalDateTime date) {
-        return ResponseEntity.ok(courseService.getByCourseListCreatedDateBetween(date, date));
-    }*/
+    @GetMapping(value = "/getCourseListCreatedDatesBetween/{date1}/{date2}")
+    public ResponseEntity<?> getCourseListCreatedDateBetween(@PathVariable ("date1") LocalDate date1,
+                                                             @PathVariable ("date2") LocalDate date2) {
+        return ResponseEntity.ok(courseService.getByCourseListCreatedDateBetween(date1, date2));
+    }
 
 }

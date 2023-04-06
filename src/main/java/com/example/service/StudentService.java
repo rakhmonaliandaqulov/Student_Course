@@ -154,4 +154,12 @@ public class StudentService {
         }
         return toDTO(list);
     }
+
+    public List<StudentDto> getByBirthDateDateBetween(LocalDate date1, LocalDate date2) {
+        List<StudentEntity> list = studentRepository.findByBirthDateBetween(date1, date2);
+        if (list.isEmpty()){
+            throw new AppBadRequestException("No student with this gender was found: ");
+        }
+        return toDTO(list);
+    }
 }

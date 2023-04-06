@@ -10,6 +10,8 @@ import org.hibernate.resource.transaction.backend.jdbc.spi.JdbcResourceTransacti
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -116,6 +118,22 @@ public class CourseService {
         List<CourseEntity> list = courseRepository.findByDuration(duration);
         if (list.isEmpty()) {
             throw new AppBadRequestException("No course found with this duration: " + duration);
+        }
+        return toDTO(list);
+    }
+
+    public List<CourseDto> getByCourseListPriceBetween(Double price1, Double price2) {
+        List<CourseEntity> list = courseRepository.findByPriceBetween(price1, price2);
+        if (list.isEmpty()) {
+            throw new AppBadRequestException("No course found with this prices between: ");
+        }
+        return toDTO(list);
+    }
+
+    public List<CourseDto> getByCourseListCreatedDateBetween(LocalDate date1, LocalDate date2) {
+        List<CourseEntity> list = courseRepository.findByCreatedDateBetween(date1, date2);
+        if (list.isEmpty()) {
+            throw new AppBadRequestException("No course found with this createdDate between: ");
         }
         return toDTO(list);
     }
