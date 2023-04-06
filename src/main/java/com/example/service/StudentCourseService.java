@@ -109,4 +109,21 @@ public class StudentCourseService {
         studentCourseRepository.deleteById(id);
         return true;
     }
+
+    public List<StudentCourseDto> getAll() {
+        Iterable<StudentCourseEntity> iterable = studentCourseRepository.findAll();
+        List<StudentCourseDto> dtoList = new LinkedList<>();
+
+        for (StudentCourseEntity entity : iterable) {
+            StudentCourseDto dto = new StudentCourseDto();
+            dto.setId(entity.getId());
+            dto.setStudentId(entity.getStudentId());
+            dto.setCourseId(entity.getCourseId());
+            dto.setMark(entity.getMark());
+            dto.setCreatedDate(entity.getCreatedDate());
+
+            dtoList.add(dto);
+        };
+        return dtoList;
+    }
 }

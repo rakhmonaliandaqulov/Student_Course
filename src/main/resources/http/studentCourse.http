@@ -26,3 +26,6 @@ GET http://localhost:8080/student_course/getByIdWithDetail/8
 
 ### StudentCourse deleteById
 DELETE http://localhost:8080/student_course/deleteById/2
+
+### StudentCourse list
+GET http://localhost:8080/student_course/list

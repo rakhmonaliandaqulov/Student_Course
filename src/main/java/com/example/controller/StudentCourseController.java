@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.dto.CourseDto;
 import com.example.dto.StudentCourseDetailDto;
 import com.example.dto.StudentCourseDto;
 import com.example.service.StudentCourseService;
@@ -41,6 +42,12 @@ public class StudentCourseController {
     public ResponseEntity<Boolean> delete(@PathVariable ("id") Integer id) {
         return ResponseEntity.ok(studentCourseService.deleteById(id));
     }
+
+    @GetMapping(value = "/list")
+    public ResponseEntity<List<StudentCourseDto>> getAll() {
+        return ResponseEntity.ok(studentCourseService.getAll());
+    }
+
 
 
 }
