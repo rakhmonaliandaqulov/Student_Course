@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -58,5 +59,15 @@ public class CourseController {
     public ResponseEntity<?> getByDuration(@PathVariable ("duration") String duration) {
         return ResponseEntity.ok(courseService.getByDuration(duration));
     }
+
+    /*@GetMapping(value = "/getCourseListPriceBetween/{ptices}/{prices}")
+    public ResponseEntity<?> getCourseListPriceBetween(@PathVariable {"price"}, {"price"} Double price) {
+        return ResponseEntity.ok(courseService.getByCourseListPriceBetween(price, price));
+    }*/
+
+    /*@GetMapping(value = "/getCourseListCreatedDatesBetween/{date}/{date}")
+    public ResponseEntity<?> getCourseListCreatedDateBetween(@PathVariable {"date"}, {"date"} LocalDateTime date) {
+        return ResponseEntity.ok(courseService.getByCourseListCreatedDateBetween(date, date));
+    }*/
 
 }

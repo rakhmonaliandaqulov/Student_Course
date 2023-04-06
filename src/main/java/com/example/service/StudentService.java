@@ -9,6 +9,7 @@ import com.example.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -166,5 +167,9 @@ public class StudentService {
             throw new AppBadRequestException("No student with this gender was found: " + gender);
         }
         return optional.get();
+    }
+
+    public StudentDto getByGivenDate(LocalDate date) {
+        return null;
     }
 }

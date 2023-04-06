@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -71,4 +72,14 @@ public class StudentController {
     public ResponseEntity<?> getByGender(@PathVariable ("gender") String gender) {
         return ResponseEntity.ok(studentService.getByGender(gender));
     }
+
+    @GetMapping(value = "/getByGivenDate/{date}")
+    public ResponseEntity<?> getByGivenDate(@PathVariable ("date") LocalDate date) {
+        return ResponseEntity.ok(studentService.getByGivenDate(date));
+    }
+
+   /* @GetMapping(value = "/getByGivenDateBetween/{date1}/{date2}")
+    public ResponseEntity<?> getByGivenDateBetween(@PathVariable ("date1") ("date2") LocalDate date, LocalDate date) {
+        return ResponseEntity.ok(studentService.getByGivenDateBetween(gender));
+    }*/
 }
