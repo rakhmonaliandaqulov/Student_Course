@@ -16,13 +16,18 @@ public class StudentCourseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "student_id")
-    private StudentEntity studentId;
 
+    @Column(name = "student_id")
+    private Integer studentId;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "column_id")
-    private CourseEntity courseId;
+    @JoinColumn(name = "student_id", insertable = false, updatable = false)
+    private StudentEntity student;
+
+    @Column(name = "course_id")
+    private Integer courseId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_id", updatable = false, insertable = false)
+    private CourseEntity course;
 
     @Column(name = "mark")
     private String mark;

@@ -1,0 +1,23 @@
+### StudentCourse create
+POST localhost:8080/student_course/create
+Content-Type: application/json
+
+{
+  "studentId": 3,
+  "courseId": 5,
+  "mark": "5"
+}
+
+### StudentCourse update
+PUT localhost:8080/student_course/update/8
+Content-Type: application/json
+
+{
+  "studentId": 3,
+  "courseId": 5,
+  "mark": "2"
+}
+
+### StudentCourse getById
+GET localhost:8080/student_course/getById/1
+
