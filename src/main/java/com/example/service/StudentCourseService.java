@@ -1,8 +1,6 @@
 package com.example.service;
 
-import com.example.dto.CourseDto;
-import com.example.dto.StudentCourseDto;
-import com.example.dto.StudentDto;
+import com.example.dto.*;
 import com.example.entity.CourseEntity;
 import com.example.entity.StudentCourseEntity;
 import com.example.entity.StudentEntity;
@@ -13,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,7 +28,7 @@ public class StudentCourseService {
         StudentCourseEntity entity = new StudentCourseEntity();
 
         StudentEntity student = studentService.get(dto.getStudentId());
-        if (student == null){
+        if (student == null) {
             throw new AppBadRequestException("Student not found: " + dto.getStudentId());
         }
         CourseEntity course = courseService.get(dto.getCourseId());
@@ -45,6 +45,7 @@ public class StudentCourseService {
         dto.setId(entity.getId());
         return entity.getId();
     }
+
     public Boolean update(Integer id, StudentCourseDto dto) {
         StudentCourseEntity entity = get1(id);
         if (entity == null) {
@@ -57,6 +58,7 @@ public class StudentCourseService {
         studentCourseRepository.save(entity);
         return true;
     }
+
     public StudentCourseEntity get1(Integer id) {
         Optional<StudentCourseEntity> optional = studentCourseRepository.findById(id);
         if (optional.isEmpty()) {
@@ -64,6 +66,7 @@ public class StudentCourseService {
         }
         return optional.get();
     }
+
     public StudentCourseDto getById(Integer id) {
         StudentCourseEntity entity = get1(id);
         if (entity == null) {
@@ -76,5 +79,25 @@ public class StudentCourseService {
         dto.setMark(entity.getMark());
         dto.setCreatedDate(entity.getCreatedDate());
         return dto;
+    }
+
+    public List<StudentCourseDetailDto> getByIdWithDetail(Integer id) {
+        List<StudentCourseDetailDto> list = new LinkedList<>();
+
+        studentCourseRepository.findAllById(id).forEach(entity -> {
+            StudentCourseDetailDto dto = new StudentCourseDetailDto();
+            dto.setId(entity.getId());
+
+            dto.setStudentId(entity.getStudentId());
+            dto.setStudentName(entity.getStudent().getName());
+            dto.setStudentSurname(entity.getStudent().getSurname());
+
+            dto.setCourseId(entity.getCourseId());
+            dto.setCourseName(entity.getCourse().getName());
+            dto.setMark(entity.getMark());
+            dto.setCreatedDate(entity.getCreatedDate());
+            list.add(dto);
+        });
+        return list;
     }
 }

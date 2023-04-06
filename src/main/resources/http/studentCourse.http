@@ -21,3 +21,6 @@ Content-Type: application/json
 ### StudentCourse getById
 GET localhost:8080/student_course/getById/1
 
+
+###
+GET http://localhost:8080/student_course/getByIdWithDetail/1

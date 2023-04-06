@@ -1,11 +1,14 @@
 package com.example.controller;
 
+import com.example.dto.StudentCourseDetailDto;
 import com.example.dto.StudentCourseDto;
 import com.example.service.StudentCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RestController
@@ -28,4 +31,11 @@ public class StudentCourseController {
     public ResponseEntity<?> getById(@PathVariable ("id") Integer id) {
         return ResponseEntity.ok(studentCourseService.getById(id));
     }
+
+    @GetMapping(value = "/getByIdWithDetail/{id}")
+    public ResponseEntity<List<StudentCourseDetailDto>> getByIdWithDetail(@PathVariable ("id") Integer id) {
+        return ResponseEntity.ok(studentCourseService.getByIdWithDetail(id));
+    }
+
+
 }
