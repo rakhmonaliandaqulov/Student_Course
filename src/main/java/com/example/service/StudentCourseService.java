@@ -100,4 +100,13 @@ public class StudentCourseService {
         });
         return list;
     }
+
+    public Boolean deleteById(Integer id) {
+        StudentCourseEntity entity = get1(id);
+        if (entity == null) {
+            throw new AppBadRequestException("StudentCourse not found: " + id);
+        }
+        studentCourseRepository.deleteById(id);
+        return true;
+    }
 }

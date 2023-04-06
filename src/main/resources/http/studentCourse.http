@@ -21,6 +21,8 @@ Content-Type: application/json
 ### StudentCourse getById
 GET localhost:8080/student_course/getById/1
 
+### StudentCourseDetail getById
+GET http://localhost:8080/student_course/getByIdWithDetail/8
 
-###
-GET http://localhost:8080/student_course/getByIdWithDetail/1
+### StudentCourse deleteById
+DELETE http://localhost:8080/student_course/deleteById/2

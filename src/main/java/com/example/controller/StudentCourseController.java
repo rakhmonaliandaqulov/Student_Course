@@ -37,5 +37,10 @@ public class StudentCourseController {
         return ResponseEntity.ok(studentCourseService.getByIdWithDetail(id));
     }
 
+    @DeleteMapping(value = "/deleteById/{id}")
+    public ResponseEntity<Boolean> delete(@PathVariable ("id") Integer id) {
+        return ResponseEntity.ok(studentCourseService.deleteById(id));
+    }
+
 
 }
