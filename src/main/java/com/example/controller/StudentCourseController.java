@@ -4,19 +4,22 @@ import com.example.dto.CourseDto;
 import com.example.dto.StudentCourseDetailDto;
 import com.example.dto.StudentCourseDto;
 import com.example.service.StudentCourseService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(value = "/student_course")
 public class StudentCourseController {
-    @Autowired
-    private StudentCourseService studentCourseService;
+
+    private final StudentCourseService studentCourseService;
 
     @PostMapping(value = "/create")
     public ResponseEntity<?> create(@RequestBody StudentCourseDto studentCourseDto) {
@@ -46,6 +49,11 @@ public class StudentCourseController {
     @GetMapping(value = "/list")
     public ResponseEntity<List<StudentCourseDto>> getAll() {
         return ResponseEntity.ok(studentCourseService.getAll());
+    }
+
+    @GetMapping(value = "/student's_mark/{createdDate}")
+    public ResponseEntity<StudentCourseDto> getByCreatedDateMark(@PathVariable ("createdDate")LocalDateTime time) {
+        return ResponseEntity.ok(studentCourseService.getByCreatedDateMark(time));
     }
 
 

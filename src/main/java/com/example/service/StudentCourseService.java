@@ -6,6 +6,7 @@ import com.example.entity.StudentCourseEntity;
 import com.example.entity.StudentEntity;
 import com.example.exp.AppBadRequestException;
 import com.example.repository.StudentCourseRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +17,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class StudentCourseService {
-    @Autowired
-    private StudentCourseRepository studentCourseRepository;
-    @Autowired
-    private StudentService studentService;
-    @Autowired
-    private CourseService courseService;
+    private final StudentCourseRepository studentCourseRepository;
+    private final StudentService studentService;
+    private final CourseService courseService;
 
     public Integer create(StudentCourseDto dto) {
         StudentCourseEntity entity = new StudentCourseEntity();
@@ -126,4 +125,12 @@ public class StudentCourseService {
         };
         return dtoList;
     }
+
+    /*public StudentCourseDto getByCreatedDateMark(LocalDateTime time) {
+        List<StudentEntity> list = studentCourseRepository.findByCreatedDate(time);
+        if (list.isEmpty()){
+            throw new AppBadRequestException("No student with this gender was found: " + time);
+        }
+        return toDTO(list);
+    }*/
 }
