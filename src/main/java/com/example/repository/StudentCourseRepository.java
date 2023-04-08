@@ -1,34 +1,31 @@
 package com.example.repository;
 
+import com.example.entity.CourseEntity;
 import com.example.entity.StudentCourseEntity;
+import com.example.entity.StudentEntity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public interface StudentCourseRepository extends CrudRepository<StudentCourseEntity, Integer> {
 
-    List<StudentCourseEntity> findAllById(Integer id);
+    @Query("FROM StudentCourseEntity where studentId = :student and createdDate = :created_date " +
+            "order by mark")
+    StudentCourseEntity findByStudentIdAndCreatedDateOrderByMark(StudentEntity student, LocalDate created_date);
 
-    List<StudentCourseEntity> findByCreatedDate(LocalDateTime time);
+    List<StudentCourseEntity> findAllByStudentIdAndCreatedDateBetween(StudentEntity studentId, LocalDate fromDate, LocalDate toDate);
 
-    List<StudentCourseEntity> findByCreatedDateAndStudentCourseEntityId(LocalDate time, Integer id);
+    List<StudentCourseEntity> findByStudentIdOrderByMarkDesc(StudentEntity student);
 
-//    @Query("select * from StudentCourseEntity " +
-//            "inner join StudentEntity on StudentCourseEntity.studentId = StudentEntity.id" +
-//            "where createdDate = :time")
-//    List<StudentCourseEntity> findByCreatedDateMark(@Param("time") LocalDateTime time);
+    List<StudentCourseEntity> findByStudentIdAndCourseIdOrderByCourseIdDescMark(StudentEntity student, CourseEntity course);
+
+    StudentCourseEntity findFirstByStudentIdOrderByMarkAsc(StudentEntity student);
+
+    StudentCourseEntity findFirstByStudentIdOrderByMark(StudentEntity student);
+
+    StudentCourseEntity findFirstByStudentIdAndAndCourseIdOrderByMark(StudentEntity student, CourseEntity course);
+
+    Integer countByCourseIdOrderByMark(CourseEntity course);
 }
-/*
-
-    List<StudentCourseEntity> findByCreatedDateBetweenAndStudentEntityId(LocalDate befor, LocalDate after, Integer id);
-    List<StudentCourseEntity> findByStudentEntityIdOrderByCreatedDateDesc(Integer id);
-    List<StudentCourseEntity> findByStudentEntityIdAndCourseEntityIdOrderByCreatedDateDesc(Integer studentId, Integer courseId);
-    List<StudentCourseEntity> findTop1ByStudentEntityIdOrderByCreatedDateDesc(Integer id);
-    List<StudentCourseEntity> findTop3ByStudentEntityIdOrderByMarkDesc(Integer id);
-    List<StudentCourseEntity> findTop1ByStudentEntityIdOrderByCreatedDate(Integer id);
-    List<StudentCourseEntity> findTop1ByStudentEntityIdAndCourseEntityIdOrderByMarkDesc(Integer studentId, Integer courseId);
-    */
