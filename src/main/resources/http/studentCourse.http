@@ -29,3 +29,6 @@ DELETE http://localhost:8080/student_course/deleteById/2
 
 ### StudentCourse list
 GET http://localhost:8080/student_course/list
+
+### StudenCourse getBycreatedDateMark
+GET http://localhost:8080/student_course/student's_mark/2023-04-06 15:32:21

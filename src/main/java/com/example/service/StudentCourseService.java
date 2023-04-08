@@ -126,11 +126,23 @@ public class StudentCourseService {
         return dtoList;
     }
 
-    /*public StudentCourseDto getByCreatedDateMark(LocalDateTime time) {
-        List<StudentEntity> list = studentCourseRepository.findByCreatedDate(time);
-        if (list.isEmpty()){
-            throw new AppBadRequestException("No student with this gender was found: " + time);
+    public List<StudentCourseDto> getByCreatedDateMark(LocalDateTime time) {
+        List<StudentCourseEntity> list = studentCourseRepository.findByCreatedDateMark(time);
+        if (list.isEmpty()) {
+            throw new AppBadRequestException("StudentCourse not found: " + time);
         }
         return toDTO(list);
-    }*/
+    }
+    public List<StudentCourseDto> toDTO(List<StudentCourseEntity> list){
+        List<StudentCourseDto> dtos = new LinkedList<>();
+        for(StudentCourseEntity entity : list){
+            StudentCourseDto dto = new StudentCourseDto();
+            dto.setId(entity.getId());
+            dto.setStudentId(entity.getStudentId());
+            dto.setCourseId(entity.getCourseId());
+            dto.setMark(entity.getMark());
+            dtos.add(dto);
+        }
+        return dtos;
+    }
 }

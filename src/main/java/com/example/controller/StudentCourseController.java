@@ -52,7 +52,7 @@ public class StudentCourseController {
     }
 
     @GetMapping(value = "/student's_mark/{createdDate}")
-    public ResponseEntity<StudentCourseDto> getByCreatedDateMark(@PathVariable ("createdDate")LocalDateTime time) {
+    public ResponseEntity<List<StudentCourseDto>> getByCreatedDateMark(@PathVariable ("createdDate") LocalDateTime time) {
         return ResponseEntity.ok(studentCourseService.getByCreatedDateMark(time));
     }
 
