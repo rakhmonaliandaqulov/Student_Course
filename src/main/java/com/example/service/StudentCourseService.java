@@ -17,11 +17,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class StudentCourseService {
-    private final StudentCourseRepository studentCourseRepository;
-    private final StudentService studentService;
-    private final CourseService courseService;
+    @Autowired
+    private StudentCourseRepository studentCourseRepository;
+    @Autowired
+    private StudentService studentService;
+    @Autowired
+    private CourseService courseService;
 
     public Integer create(StudentCourseDto dto) {
         StudentCourseEntity entity = new StudentCourseEntity();
@@ -126,8 +128,8 @@ public class StudentCourseService {
         return dtoList;
     }
 
-    public List<StudentCourseDto> getByCreatedDateMark(LocalDateTime time) {
-        List<StudentCourseEntity> list = studentCourseRepository.findByCreatedDateMark(time);
+    public List<StudentCourseDto> getByCreatedDateMark(LocalDate time, Integer id) {
+        List<StudentCourseEntity> list = studentCourseRepository.findByCreatedDateAndStudentCourseEntityId(time, id);
         if (list.isEmpty()) {
             throw new AppBadRequestException("StudentCourse not found: " + time);
         }

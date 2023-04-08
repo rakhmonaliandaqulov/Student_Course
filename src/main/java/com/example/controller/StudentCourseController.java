@@ -10,16 +10,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
 @RestController
-@RequiredArgsConstructor
 @RequestMapping(value = "/student_course")
 public class StudentCourseController {
-
-    private final StudentCourseService studentCourseService;
+    @Autowired
+    private StudentCourseService studentCourseService;
 
     @PostMapping(value = "/create")
     public ResponseEntity<?> create(@RequestBody StudentCourseDto studentCourseDto) {
@@ -51,9 +51,10 @@ public class StudentCourseController {
         return ResponseEntity.ok(studentCourseService.getAll());
     }
 
-    @GetMapping(value = "/student's_mark/{createdDate}")
-    public ResponseEntity<List<StudentCourseDto>> getByCreatedDateMark(@PathVariable ("createdDate") LocalDateTime time) {
-        return ResponseEntity.ok(studentCourseService.getByCreatedDateMark(time));
+    @GetMapping(value = "/student's_mark/{createdDate}/{id}")
+    public ResponseEntity<List<StudentCourseDto>> getByCreatedDateMark(@PathVariable ("createdDate") LocalDate time,
+                                                                       @PathVariable ("id") Integer id) {
+        return ResponseEntity.ok(studentCourseService.getByCreatedDateMark(time, id));
     }
 
 
