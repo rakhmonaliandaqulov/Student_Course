@@ -3,11 +3,13 @@ package com.example.controller;
 import com.example.dto.CourseDto;
 import com.example.dto.StudentCourseDetailDto;
 import com.example.dto.StudentCourseDto;
+import com.example.dto.StudentDto;
 import com.example.entity.CourseEntity;
 import com.example.entity.StudentEntity;
 import com.example.service.StudentCourseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -54,7 +56,7 @@ public class StudentCourseController {
     }
 
     @GetMapping(value = "/getByDate")
-    public ResponseEntity<?> getByDate(@RequestParam("studentId") Integer id, @RequestParam("created_date") LocalDate created_date){
+    public ResponseEntity<?> getByDate(@RequestParam("studentId") Integer id, @RequestParam("created_date") LocalDateTime created_date){
         StudentEntity student = new StudentEntity();
         student.setId(id);
         StudentCourseDto dto = studentCourseService.getByDate(student, created_date);
@@ -63,8 +65,8 @@ public class StudentCourseController {
 
     @GetMapping(value = "/getBetweenDate")
     private ResponseEntity<List<StudentCourseDto>> getBetweenDate(@RequestParam("studentId") Integer sId,
-                                                                  @RequestParam("fromDate") LocalDate fromDate,
-                                                                  @RequestParam("toDate") LocalDate toDate){
+                                                                  @RequestParam("fromDate") LocalDateTime fromDate,
+                                                                  @RequestParam("toDate") LocalDateTime toDate){
         StudentEntity student = new StudentEntity();
         student.setId(sId);
         List<StudentCourseDto> dto = studentCourseService.
@@ -124,6 +126,7 @@ public class StudentCourseController {
         Integer count = studentCourseService.countCourseMark( course);
         return ResponseEntity.ok(count);
     }
+
 
 
 

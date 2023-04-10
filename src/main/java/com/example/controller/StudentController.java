@@ -1,12 +1,14 @@
 package com.example.controller;
 
 import com.example.dto.StudentDto;
+import com.example.dto.StudentFilterRequestDto;
 import com.example.dto.StudentUpdateDTO;
 import com.example.entity.StudentEntity;
 import com.example.enums.StudentGender;
 import com.example.repository.StudentRepository;
 import com.example.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
@@ -82,5 +84,19 @@ public class StudentController {
     public ResponseEntity<?> getByGivenDateBetween(@PathVariable ("date1") LocalDate date1,
                                                    @PathVariable ("date2") LocalDate date2) {
         return ResponseEntity.ok(studentService.getByBirthDateDateBetween(date1, date2));
+    }
+
+    @GetMapping(value = "/paging")
+    public ResponseEntity<Page<StudentDto>> paging(@RequestParam(value = "page", defaultValue = "1") int page,
+                                                   @RequestParam(value = "size", defaultValue = "30") int size) {
+        return ResponseEntity.ok(studentService.pagination(page, size));
+    }
+
+    @PostMapping(value = "/paging-name")
+    public ResponseEntity<Page<StudentDto>> pagingWithName(@RequestParam(value = "page", defaultValue = "1") int page,
+                                                           @RequestParam(value = "size", defaultValue = "30") int size,
+                                                           @RequestBody StudentFilterRequestDto filter) {
+        Page<StudentDto> response = studentService.paginationWithName(filter.getName(), page, size);
+        return ResponseEntity.ok(response);
     }
 }

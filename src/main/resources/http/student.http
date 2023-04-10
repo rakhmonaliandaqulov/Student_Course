@@ -57,3 +57,14 @@ GET localhost:8080/student/getByGivenDate/2000-12-12
 
 ### Student getByBirthDateBetween
 GET localhost:8080/student/getByBirthDateBetween/1990-01-01/2000-12-12
+
+### Student pagination
+GET http://localhost:8080/student/paging
+
+### Student pagination with name
+POST localhost:8080/student/paging-name?page=1&size=6
+Content-Type:  application/json
+
+{
+  "name": "aaaa"
+}

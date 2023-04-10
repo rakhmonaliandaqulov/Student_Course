@@ -5,6 +5,7 @@ import com.example.entity.CourseEntity;
 import com.example.entity.StudentCourseEntity;
 import com.example.entity.StudentEntity;
 import com.example.exp.AppBadRequestException;
+import com.example.mapper.CourseInfoMapper;
 import com.example.repository.StudentCourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -148,7 +149,7 @@ public class StudentCourseService {
         return dtos;
     }
 
-    public StudentCourseDto getByDate(StudentEntity student_id, LocalDate date) {
+    public StudentCourseDto getByDate(StudentEntity student_id, LocalDateTime date) {
         StudentCourseEntity entity = studentCourseRepository.
                 findByStudentIdAndCreatedDateOrderByMark(student_id, date);
         StudentCourseDto dto = new StudentCourseDto();
@@ -161,7 +162,7 @@ public class StudentCourseService {
         return dto;
     }
 
-    public List<StudentCourseDto> getStudentCourseMarkListBetweenDates(StudentEntity studentId, LocalDate fromDate, LocalDate toDate) {
+    public List<StudentCourseDto> getStudentCourseMarkListBetweenDates(StudentEntity studentId, LocalDateTime fromDate, LocalDateTime toDate) {
         Iterable<StudentCourseEntity> iterable = studentCourseRepository.
                 findAllByStudentIdAndCreatedDateBetween(studentId, fromDate,toDate);
         List<StudentCourseDto> studentDTOLinkedList = new LinkedList<>();
@@ -250,6 +251,31 @@ public class StudentCourseService {
     public Integer countCourseMark(CourseEntity course) {
         Integer count = studentCourseRepository.countByCourseIdOrderByMark(course);
         return count;
+    }
+    public void test() {
+        List<Object[]> courseObjList = studentCourseRepository.findLastCourseMarkerAsNative(1);
+        if (courseObjList.size() > 0) {
+            Object[] courseObj = courseObjList.get(0);
+
+            CourseDto courseDTO = new CourseDto();
+            courseDTO.setId((Integer) courseObj[0]);
+            courseDTO.setName((String) courseObj[1]);
+            System.out.println(courseDTO);
+        }
+
+        System.out.println("dasda");
+    }
+
+    public void test2() {
+        CourseInfoMapper courseInfoMapper = studentCourseRepository.findLastCourseMarkerAsNativeMapping(1);
+        if (courseInfoMapper != null) {
+            CourseDto courseDTO = new CourseDto();
+            courseDTO.setId(courseInfoMapper.getCId());
+            courseDTO.setName(courseInfoMapper.getCName());
+            System.out.println(courseDTO +" "+ courseInfoMapper.getMark());
+        }
+
+        System.out.println("dasda");
     }
 
 }

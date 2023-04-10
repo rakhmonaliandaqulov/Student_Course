@@ -31,7 +31,7 @@ DELETE http://localhost:8080/student_course/deleteById/2
 GET http://localhost:8080/student_course/list
 
 ### StudentCourse getByDate
-GET localhost:8080/student_course/getByDate?studentId=1&created_date=2022-01-01
+GET localhost:8080/student_course/getByDate/3/2023-04-06 15:33:05.905722
 
 ### StudentCourse getByBetweenDate
 GET localhost:8080/student_course/getBetweenDate?studentId=1&fromDate=2022-01-01&toDate=2022-01-03
