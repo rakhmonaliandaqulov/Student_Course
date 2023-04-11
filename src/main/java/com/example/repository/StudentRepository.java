@@ -11,7 +11,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public interface StudentRepository extends CrudRepository<StudentEntity, Integer>, PagingAndSortingRepository<StudentEntity, Integer> {
+public interface StudentRepository extends CrudRepository<StudentEntity, Integer>,
+        PagingAndSortingRepository<StudentEntity, Integer> {
     List<StudentEntity> findBySurname(String surname);
     List<StudentEntity> findByLevel(Integer level);
     List<StudentEntity> findByAge(Integer age);
@@ -20,4 +21,6 @@ public interface StudentRepository extends CrudRepository<StudentEntity, Integer
     List<StudentEntity> findByGender(StudentGender gender);
     List<StudentEntity> findByBirthDateBetween(LocalDate date1, LocalDate date2);
     Page<StudentEntity> findAllByName(String name, Pageable pageable);
+
+    Page<StudentEntity> findAllByLevel(Integer level, Pageable paging);
 }

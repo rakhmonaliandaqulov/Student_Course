@@ -164,7 +164,7 @@ public class StudentService {
     }
 
     public Page<StudentDto> pagination(int page, int size) {
-        Sort sort = Sort.by(Sort.Direction.DESC, "createdDate");
+        Sort sort = Sort.by(Sort.Direction.DESC, "birthDate");
         Pageable paging = PageRequest.of(page - 1, size, sort);
         Page<StudentEntity> pageObj = studentRepository.findAll(paging);
 
@@ -178,6 +178,10 @@ public class StudentService {
             dto.setId(entity.getId());
             dto.setName(entity.getName());
             dto.setSurname(entity.getSurname());
+            dto.setLevel(entity.getLevel());
+            dto.setAge(entity.getAge());
+            dto.setBirthDate(entity.getBirthDate());
+            dto.setGender(entity.getGender());
             dtoList.add(dto);
         }
 
@@ -186,7 +190,7 @@ public class StudentService {
     }
 
     public Page<StudentDto> paginationWithName(String name, int page, int size) {
-        Sort sort = Sort.by(Sort.Direction.DESC, "createdDate");
+        Sort sort = Sort.by(Sort.Direction.DESC, "birthDate");
         Pageable paging = PageRequest.of(page - 1, size, sort);
         Page<StudentEntity> pageObj = studentRepository.findAllByName(name, paging);
 
@@ -198,6 +202,33 @@ public class StudentService {
             dto.setId(entity.getId());
             dto.setName(entity.getName());
             dto.setSurname(entity.getSurname());
+            dto.setLevel(entity.getLevel());
+            dto.setAge(entity.getAge());
+            dto.setBirthDate(entity.getBirthDate());
+            dto.setGender(entity.getGender());
+            dtoList.add(dto);
+        }
+        Page<StudentDto> response = new PageImpl<StudentDto>(dtoList, paging, totalCount);
+        return response;
+    }
+
+    public Page<StudentDto> paginationWithLevel(Integer level, int page, int size) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        Pageable paging = PageRequest.of(page - 1, size, sort);
+        Page<StudentEntity> pageObj = studentRepository.findAllByLevel(level, paging);
+
+        Long totalCount = pageObj.getTotalElements();
+        List<StudentEntity> entityList = pageObj.getContent();
+        List<StudentDto> dtoList = new LinkedList<>();
+        for (StudentEntity entity : entityList) {
+            StudentDto dto = new StudentDto();
+            dto.setId(entity.getId());
+            dto.setName(entity.getName());
+            dto.setSurname(entity.getSurname());
+            dto.setLevel(entity.getLevel());
+            dto.setAge(entity.getAge());
+            dto.setBirthDate(entity.getBirthDate());
+            dto.setGender(entity.getGender());
             dtoList.add(dto);
         }
         Page<StudentDto> response = new PageImpl<StudentDto>(dtoList, paging, totalCount);

@@ -4,6 +4,7 @@ import com.example.dto.CourseDto;
 import com.example.dto.StudentDto;
 import com.example.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -71,6 +72,12 @@ public class CourseController {
     public ResponseEntity<?> getCourseListCreatedDateBetween(@PathVariable ("date1") LocalDate date1,
                                                              @PathVariable ("date2") LocalDate date2) {
         return ResponseEntity.ok(courseService.getByCourseListCreatedDateBetween(date1, date2));
+    }
+
+    @GetMapping(value = "/paging")
+    public ResponseEntity<Page<CourseDto>> paging(@RequestParam(value = "page", defaultValue = "1") int page,
+                                                   @RequestParam(value = "size", defaultValue = "3") int size) {
+        return ResponseEntity.ok(courseService.pagination(page, size));
     }
 
 }

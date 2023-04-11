@@ -88,15 +88,16 @@ public class StudentController {
 
     @GetMapping(value = "/paging")
     public ResponseEntity<Page<StudentDto>> paging(@RequestParam(value = "page", defaultValue = "1") int page,
-                                                   @RequestParam(value = "size", defaultValue = "30") int size) {
+                                                   @RequestParam(value = "size", defaultValue = "3") int size) {
         return ResponseEntity.ok(studentService.pagination(page, size));
     }
 
-    @PostMapping(value = "/paging-name")
-    public ResponseEntity<Page<StudentDto>> pagingWithName(@RequestParam(value = "page", defaultValue = "1") int page,
-                                                           @RequestParam(value = "size", defaultValue = "30") int size,
-                                                           @RequestBody StudentFilterRequestDto filter) {
-        Page<StudentDto> response = studentService.paginationWithName(filter.getName(), page, size);
+    @PostMapping(value = "/paging-level")
+    public ResponseEntity<Page<StudentDto>> pagingWithLevel(@RequestParam(value = "page", defaultValue = "1") int page,
+                                                           @RequestParam(value = "size", defaultValue = "3") int size,
+                                                           @RequestBody Integer level) {
+        Page<StudentDto> response = studentService.paginationWithLevel(level, page, size);
         return ResponseEntity.ok(response);
     }
+
 }

@@ -3,7 +3,7 @@ POST localhost:8080/student/create
 Content-Type: application/json
 
 {
-  "name": "trhgf",
+  "name": "Alish",
   "surname": "dfbf",
   "age": 20,
   "birthDate": "1999-08-31",
@@ -66,5 +66,5 @@ POST localhost:8080/student/paging-name?page=1&size=6
 Content-Type:  application/json
 
 {
-  "name": "aaaa"
+  "name": ""
 }

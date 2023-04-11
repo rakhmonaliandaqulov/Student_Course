@@ -45,3 +45,6 @@ GET localhost:8080/course/getCourseListPriceBetween/0.0/1000.0
 
 ### Course getByListCrreatedDateBetween
 GET localhost:8080/course/getCourseListCreatedDatesBetween/2012-01-01/2024-12-12
+
+### Course pagination
+GET http://localhost:8080/course/paging
