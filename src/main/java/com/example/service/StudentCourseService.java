@@ -300,11 +300,33 @@ public class StudentCourseService {
         Page<StudentCourseDto> response = new PageImpl<StudentCourseDto>(dtoList, pageable, totalCount);
         return response;
     }
-    public Page<StudentCourseDto> pagingByIdWithCreatedDate(StudentEntity id, int page, int size) {
+    public Page<StudentCourseDto> pagingByStudentIdWithCreatedDate(Integer id, int page, int size) {
         Sort sort = Sort.by(Sort.Direction.DESC, "createdDate");
         Pageable pageable = PageRequest.of(page - 1, size, sort);
 
-        Page<StudentCourseEntity> page1 = studentCourseRepository.findAllById(id, pageable);
+        Page<StudentCourseEntity> page1 = studentCourseRepository.findAllByStudentId(id, pageable);
+        Long totalCount = page1.getTotalElements();
+        List<StudentCourseEntity> entityList = page1.getContent();
+        List<StudentCourseDto> dtoList = new LinkedList<>();
+
+        for (StudentCourseEntity entity : entityList) {
+            StudentCourseDto dto = new StudentCourseDto();
+            dto.setId(entity.getId());
+            dto.setCourseId(entity.getCourseId());
+            dto.setStudentId(entity.getStudentId());
+            dto.setMark(entity.getMark());
+            dto.setCreatedDate(entity.getCreatedDate());
+            dtoList.add(dto);
+        }
+        Page<StudentCourseDto> response = new PageImpl<StudentCourseDto>(dtoList, pageable, totalCount);
+        return response;
+    }
+
+    public Page<StudentCourseDto> pagingByCourseIdWithCreatedDate(Integer id, int page, int size) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "createdDate");
+        Pageable pageable = PageRequest.of(page - 1, size, sort);
+
+        Page<StudentCourseEntity> page1 = studentCourseRepository.findAllByCourseId(id, pageable);
         Long totalCount = page1.getTotalElements();
         List<StudentCourseEntity> entityList = page1.getContent();
         List<StudentCourseDto> dtoList = new LinkedList<>();

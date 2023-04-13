@@ -132,11 +132,18 @@ public class StudentCourseController {
         return ResponseEntity.ok(studentCourseService.pagination(page, size));
     }
 
-    @GetMapping(value = "/pagingByIdWithCreatedDate/{student_id}")
-    public ResponseEntity<Page<StudentCourseDto>> pagingByIdWithCreatedDate(@RequestParam(value = "page", defaultValue = "1") int page,
+    @GetMapping(value = "/pagingByStudentIdWithCreatedDate/{student_id}")
+    public ResponseEntity<Page<StudentCourseDto>> pagingByStudentIdWithCreatedDate(@RequestParam(value = "page", defaultValue = "1") int page,
                                                                         @RequestParam(value = "size", defaultValue = "2") int size,
-                                                                        @PathVariable ("student_id") StudentEntity id) {
-        return ResponseEntity.ok(studentCourseService.pagingByIdWithCreatedDate(id, page, size));
+                                                                        @PathVariable ("student_id") Integer id) {
+        return ResponseEntity.ok(studentCourseService.pagingByStudentIdWithCreatedDate(id, page, size));
+    }
+
+    @GetMapping(value = "/pagingByCourseIdWithCreatedDate/{course_id}")
+    public ResponseEntity<Page<StudentCourseDto>> pagingByIdWithCreatedDate(@RequestParam(value = "page", defaultValue = "1") int page,
+                                                                            @RequestParam(value = "size", defaultValue = "2") int size,
+                                                                            @PathVariable ("course_id") Integer id) {
+        return ResponseEntity.ok(studentCourseService.pagingByCourseIdWithCreatedDate(id, page, size));
     }
 
 }

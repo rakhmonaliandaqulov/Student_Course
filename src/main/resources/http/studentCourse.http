@@ -55,4 +55,7 @@ GET localhost:8080/student_course/countCourseMark?courseId=1
 GET http://localhost:8080/student_course/paging
 
 ### StudentCourse paging with student id
-GET http://localhost:8080/student_course/pagingByIdWithCreatedDate/1
+GET http://localhost:8080/student_course/pagingByStudentIdWithCreatedDate/1
+
+### StudentCourse paging with course id
+GET http://localhost:8080/student_course/pagingByCourseIdWithCreatedDate/2

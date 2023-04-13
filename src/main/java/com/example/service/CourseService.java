@@ -1,18 +1,14 @@
 package com.example.service;
 
 import com.example.dto.CourseDto;
-import com.example.dto.StudentDto;
 import com.example.entity.CourseEntity;
-import com.example.entity.StudentEntity;
 import com.example.exp.AppBadRequestException;
 import com.example.repository.CourseRepository;
-import org.hibernate.resource.transaction.backend.jdbc.spi.JdbcResourceTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -205,17 +201,26 @@ public class CourseService {
         return response;
     }
 
-    /*public Page<CourseDto> pagingByPricesWithCreateDateBetween(LocalDate date1, LocalDate date2, int page, int size) {
+    public Page<CourseDto> pagingByPricesWithCreateDateBetween(LocalDate date1, LocalDate date2, int page, int size) {
         Sort sort = Sort.by(Sort.Direction.DESC, "createdDate");
         Pageable pageable = PageRequest.of(page - 1, size, sort);
-        Pageable pageable1 = PageRequest.of(page - 1, size, sort);
 
-        Page<CourseEntity> page1 = courseRepository.findByCreatedDateBetween(date1, date2, pageable, pageable1);
+        Page<CourseEntity> page1 =  courseRepository.findByCreatedDateBetween(date1, date2, pageable);
         Long totalCount = page1.getTotalElements();
         List<CourseEntity> entityList = page1.getContent();
         List<CourseDto> dtoList = new LinkedList<>();
-
-    }*/
+        for (CourseEntity entity : entityList) {
+            CourseDto dto = new CourseDto();
+            dto.setId(entity.getId());
+            dto.setName(entity.getName());
+            dto.setPrice(entity.getPrice());
+            dto.setDuration(entity.getDuration());
+            dto.setCreatedDate(entity.getCreatedDate());
+            dtoList.add(dto);
+        }
+        Page<CourseDto> response = new PageImpl<CourseDto>(dtoList, pageable, totalCount);
+        return response;
+    }
 }
 /*
 Student

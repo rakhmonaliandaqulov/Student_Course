@@ -56,5 +56,7 @@ public interface StudentCourseRepository extends CrudRepository<StudentCourseEnt
 
     Page<StudentCourseEntity> findAll(Pageable pageable);
 
-    Page<StudentCourseEntity> findAllById(StudentEntity id, Pageable pageable);
+    Page<StudentCourseEntity> findAllByStudentId(Integer id, Pageable pageable);
+
+    Page<StudentCourseEntity> findAllByCourseId(Integer id, Pageable pageable);
 }
