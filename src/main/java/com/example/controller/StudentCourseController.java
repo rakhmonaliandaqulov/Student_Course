@@ -132,18 +132,31 @@ public class StudentCourseController {
         return ResponseEntity.ok(studentCourseService.pagination(page, size));
     }
 
-    @GetMapping(value = "/pagingByStudentIdWithCreatedDate/{student_id}")
-    public ResponseEntity<Page<StudentCourseDto>> pagingByStudentIdWithCreatedDate(@RequestParam(value = "page", defaultValue = "1") int page,
+    @GetMapping(value = "/paginationWithStudentId/{student_id}")
+    public ResponseEntity<Page<StudentCourseDto>> paginationWithStudentId(@RequestParam(value = "page", defaultValue = "1") int page,
                                                                         @RequestParam(value = "size", defaultValue = "2") int size,
                                                                         @PathVariable ("student_id") Integer id) {
-        return ResponseEntity.ok(studentCourseService.pagingByStudentIdWithCreatedDate(id, page, size));
+        return ResponseEntity.ok(studentCourseService.paginationWithStudentId(id, page, size));
     }
 
-    @GetMapping(value = "/pagingByCourseIdWithCreatedDate/{course_id}")
-    public ResponseEntity<Page<StudentCourseDto>> pagingByIdWithCreatedDate(@RequestParam(value = "page", defaultValue = "1") int page,
+    @GetMapping(value = "/paginationWithCourseId/{course_id}")
+    public ResponseEntity<Page<StudentCourseDto>> paginationWithCourseId(@RequestParam(value = "page", defaultValue = "1") int page,
                                                                             @RequestParam(value = "size", defaultValue = "2") int size,
                                                                             @PathVariable ("course_id") Integer id) {
-        return ResponseEntity.ok(studentCourseService.pagingByCourseIdWithCreatedDate(id, page, size));
+        return ResponseEntity.ok(studentCourseService.paginationWithCourseId(id, page, size));
+    }
+
+    @PostMapping(value = "/paging-studentId")
+    public ResponseEntity<Page<StudentCourseDto>> paginationWithStudentId(@RequestParam(value = "page", defaultValue = "1") int page,
+                                                               @RequestParam(value = "size", defaultValue = "30") int size,
+                                                               @RequestBody StudentCourseDto filter) {
+        return ResponseEntity.ok(studentCourseService.paginationWithStudentId(filter.getStudentId(), page, size));
+    }
+    @PostMapping(value = "/paging-courseId")
+    public ResponseEntity<Page<StudentCourseDto>> paginationWithCourseId(@RequestParam(value = "page", defaultValue = "1") int page,
+                                                                      @RequestParam(value = "size", defaultValue = "30") int size,
+                                                                      @RequestBody StudentCourseDto filter) {
+        return ResponseEntity.ok(studentCourseService.paginationWithCourseId(filter.getCourseId(), page, size));
     }
 
 }

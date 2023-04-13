@@ -51,11 +51,29 @@ GET localhost:8080/student_course/getStudentCourseFirstMark?studentId=1&courseId
 ### StudentCourse getCountCourseMark
 GET localhost:8080/student_course/countCourseMark?courseId=1
 
+----
 ### StudentCourse paging
 GET http://localhost:8080/student_course/paging
 
 ### StudentCourse paging with student id
-GET http://localhost:8080/student_course/pagingByStudentIdWithCreatedDate/1
+GET http://localhost:8080/student_course/paginationWithStudentId/1
 
 ### StudentCourse paging with course id
-GET http://localhost:8080/student_course/pagingByCourseIdWithCreatedDate/2
+GET http://localhost:8080/student_course/paginationWithCourseId/2
+
+----
+### StudentCourse pagination with student id
+POST localhost:8080/student_course/paging-studentId?page=1&size=4
+Content-Type:  application/json
+
+{
+  "studentId": 1
+}
+
+### StudentCourse pagination with course id
+POST localhost:8080/student_course/paging-courseId?page=1&size=4
+Content-Type:  application/json
+
+{
+  "course": 2
+}

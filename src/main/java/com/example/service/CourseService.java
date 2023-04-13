@@ -178,8 +178,7 @@ public class CourseService {
         return response;
 
     }
-
-    public Page<CourseDto> pagingByPriceWithCreatedDate(Double price, int page, int size) {
+    public Page<CourseDto> paginationWithPrice(Double price, int page, int size) {
         Sort sort = Sort.by(Sort.Direction.DESC, "createdDate");
         Pageable pageable = PageRequest.of(page - 1, size, sort);
 
@@ -200,8 +199,7 @@ public class CourseService {
         Page<CourseDto> response = new PageImpl<CourseDto>(dtoList, pageable, totalCount);
         return response;
     }
-
-    public Page<CourseDto> pagingByPricesWithCreateDateBetween(LocalDate date1, LocalDate date2, int page, int size) {
+    public Page<CourseDto> paginationWithPriceBetween(LocalDate date1, LocalDate date2, int page, int size) {
         Sort sort = Sort.by(Sort.Direction.DESC, "createdDate");
         Pageable pageable = PageRequest.of(page - 1, size, sort);
 

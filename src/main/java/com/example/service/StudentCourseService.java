@@ -300,7 +300,7 @@ public class StudentCourseService {
         Page<StudentCourseDto> response = new PageImpl<StudentCourseDto>(dtoList, pageable, totalCount);
         return response;
     }
-    public Page<StudentCourseDto> pagingByStudentIdWithCreatedDate(Integer id, int page, int size) {
+    public Page<StudentCourseDto> paginationWithStudentId(Integer id, int page, int size) {
         Sort sort = Sort.by(Sort.Direction.DESC, "createdDate");
         Pageable pageable = PageRequest.of(page - 1, size, sort);
 
@@ -322,7 +322,7 @@ public class StudentCourseService {
         return response;
     }
 
-    public Page<StudentCourseDto> pagingByCourseIdWithCreatedDate(Integer id, int page, int size) {
+    public Page<StudentCourseDto> paginationWithCourseId(Integer id, int page, int size) {
         Sort sort = Sort.by(Sort.Direction.DESC, "createdDate");
         Pageable pageable = PageRequest.of(page - 1, size, sort);
 

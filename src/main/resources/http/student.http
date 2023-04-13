@@ -61,17 +61,40 @@ GET localhost:8080/student/getByBirthDateBetween/1990-01-01/2000-12-12
 ### Student pagination
 GET http://localhost:8080/student/paging
 
-### Student pagination with name
-POST localhost:8080/student/paging-name?page=1&size=6
-Content-Type:  application/json
-
-{
-  "name": ""
-}
-
-
 ### Student paging by given level
 GET http://localhost:8080/student/paging-level/2
 
 ### Student paging by given gender
 GET http://localhost:8080/student/paging-gender/MALE
+
+### Student pagination with name
+POST localhost:8080/student/paging-name?page=1&size=2
+Content-Type:  application/json
+
+{
+  "name": "Alish"
+}
+
+### Student pagination with name
+POST localhost:8080/student/paging-name?page=1&size=2
+Content-Type:  application/json
+
+{
+  "name": "Alish"
+}
+
+### Student pagination with level
+POST localhost:8080/student/paging-level?page=1&size=3
+Content-Type:  application/json
+
+{
+  "level": 2
+}
+
+### Student pagination with gender
+POST localhost:8080/student/paging-gender?page=1&size=4
+Content-Type:  application/json
+
+{
+  "gender": "FEMALE"
+}
