@@ -3,6 +3,7 @@ package com.example.repository;
 import com.example.entity.CourseEntity;
 import com.example.entity.StudentEntity;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -18,6 +19,8 @@ public interface CourseRepository extends CrudRepository<CourseEntity, Integer>,
     List<CourseEntity> findByDuration(String duration);
     List<CourseEntity> findByPriceBetween(Double price1, Double price2);
     List<CourseEntity> findByCreatedDateBetween(LocalDate date1, LocalDate date2);
+
+    Page<CourseEntity> findAllByPrice(Double price, Pageable pageable);
 
 //    Page<CourseEntity> findAll(int page, int size);
 }

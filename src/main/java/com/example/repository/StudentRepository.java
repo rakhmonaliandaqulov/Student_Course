@@ -23,4 +23,5 @@ public interface StudentRepository extends CrudRepository<StudentEntity, Integer
     Page<StudentEntity> findAllByName(String name, Pageable pageable);
 
     Page<StudentEntity> findAllByLevel(Integer level, Pageable paging);
+    Page<StudentEntity> findAllByGender(StudentGender gender, Pageable paging);
 }

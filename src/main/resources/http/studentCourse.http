@@ -50,3 +50,9 @@ GET localhost:8080/student_course/getStudentCourseFirstMark?studentId=1&courseId
 
 ### StudentCourse getCountCourseMark
 GET localhost:8080/student_course/countCourseMark?courseId=1
+
+### StudentCourse paging
+GET http://localhost:8080/student_course/paging
+
+### StudentCourse paging with student id
+GET http://localhost:8080/student_course/pagingByIdWithCreatedDate/1

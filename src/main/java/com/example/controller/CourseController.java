@@ -74,10 +74,32 @@ public class CourseController {
         return ResponseEntity.ok(courseService.getByCourseListCreatedDateBetween(date1, date2));
     }
 
-    @GetMapping(value = "/paging")
-    public ResponseEntity<Page<CourseDto>> paging(@RequestParam(value = "page", defaultValue = "1") int page,
+    @GetMapping(value = "/pagingById")
+    public ResponseEntity<Page<CourseDto>> pagingpagingById(@RequestParam(value = "page", defaultValue = "1") int page,
                                                    @RequestParam(value = "size", defaultValue = "3") int size) {
-        return ResponseEntity.ok(courseService.pagination(page, size));
+        return ResponseEntity.ok(courseService.paginationById(page, size));
     }
+
+    @GetMapping(value = "/pagingByCreatedDate")
+    public ResponseEntity<Page<CourseDto>> pagingpagingByCreatedDate(@RequestParam(value = "page", defaultValue = "2") int page,
+                                                  @RequestParam(value = "size", defaultValue = "2") int size) {
+        return ResponseEntity.ok(courseService.paginationByCreatedDate(page, size));
+    }
+
+    @GetMapping(value = "/pagingByPriceWithCreatedDate/{price}")
+    public ResponseEntity<Page<CourseDto>> pagingByPriceWithCreatedDate(@RequestParam(value = "page", defaultValue = "1") int page,
+                                                                     @RequestParam(value = "size", defaultValue = "2") int size,
+                                                                     @PathVariable ("price") Double price) {
+        return ResponseEntity.ok(courseService.pagingByPriceWithCreatedDate(price, page, size));
+    }
+
+   /* @GetMapping(value = "/pagingByPricesWithCreatedDatesBetween/{price1}/{price2}")
+    public ResponseEntity<Page<CourseDto>> pagingByPricesWithCreatedDatesBetween(@RequestParam(value = "page", defaultValue = "1") int page,
+                                                             @RequestParam(value = "size", defaultValue = "2") int size,
+                                                             @PathVariable ("price1") LocalDate date1,
+                                                             @PathVariable ("price2") LocalDate date2) {
+        return ResponseEntity.ok(courseService.pagingByPricesWithCreateDateBetween(date1, date2, page, size));
+    }*/
+
 
 }

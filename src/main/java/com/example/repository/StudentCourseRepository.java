@@ -1,9 +1,12 @@
 package com.example.repository;
 
+import com.example.dto.StudentDto;
 import com.example.entity.CourseEntity;
 import com.example.entity.StudentCourseEntity;
 import com.example.entity.StudentEntity;
 import com.example.mapper.CourseInfoMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -50,4 +53,8 @@ public interface StudentCourseRepository extends CrudRepository<StudentCourseEnt
             " where scm.student_id = :studentId  " +
             "order by scm.created_date desc limit 1 ", nativeQuery = true)
     CourseInfoMapper findLastCourseMarkerAsNativeMapping(@Param("studentId") Integer studentId);
+
+    Page<StudentCourseEntity> findAll(Pageable pageable);
+
+    Page<StudentCourseEntity> findAllById(StudentEntity id, Pageable pageable);
 }

@@ -126,8 +126,17 @@ public class StudentCourseController {
         Integer count = studentCourseService.countCourseMark( course);
         return ResponseEntity.ok(count);
     }
+    @GetMapping(value = "/paging")
+    public ResponseEntity<Page<StudentCourseDto>> paging(@RequestParam(value = "page", defaultValue = "1") int page,
+                                                   @RequestParam(value = "size", defaultValue = "3") int size) {
+        return ResponseEntity.ok(studentCourseService.pagination(page, size));
+    }
 
-
-
+    @GetMapping(value = "/pagingByIdWithCreatedDate/{student_id}")
+    public ResponseEntity<Page<StudentCourseDto>> pagingByIdWithCreatedDate(@RequestParam(value = "page", defaultValue = "1") int page,
+                                                                        @RequestParam(value = "size", defaultValue = "2") int size,
+                                                                        @PathVariable ("student_id") StudentEntity id) {
+        return ResponseEntity.ok(studentCourseService.pagingByIdWithCreatedDate(id, page, size));
+    }
 
 }

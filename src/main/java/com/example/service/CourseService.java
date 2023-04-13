@@ -139,7 +139,28 @@ public class CourseService {
         return toDTO(list);
     }
 
-    public Page<CourseDto> pagination(int page, int size) {
+    public Page<CourseDto> paginationById(int page, int size) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        Pageable pageable = PageRequest.of(page - 1, size, sort);
+
+        Page<CourseEntity> page1 = courseRepository.findAll(pageable);
+        Long totalCount = page1.getTotalElements();
+        List<CourseEntity> entityList = page1.getContent();
+        List<CourseDto> dtoList = new LinkedList<>();
+
+        for (CourseEntity entity : entityList) {
+            CourseDto dto = new CourseDto();
+            dto.setId(entity.getId());
+            dto.setName(entity.getName());
+            dto.setPrice(entity.getPrice());
+            dto.setDuration(entity.getDuration());
+            dto.setCreatedDate(entity.getCreatedDate());
+            dtoList.add(dto);
+        }
+        Page<CourseDto> response = new PageImpl<CourseDto>(dtoList, pageable, totalCount);
+        return response;
+    }
+    public Page<CourseDto> paginationByCreatedDate(int page, int size) {
         Sort sort = Sort.by(Sort.Direction.DESC, "createdDate");
         Pageable pageable = PageRequest.of(page - 1, size, sort);
 
@@ -160,8 +181,41 @@ public class CourseService {
         Page<CourseDto> response = new PageImpl<CourseDto>(dtoList, pageable, totalCount);
         return response;
 
-
     }
+
+    public Page<CourseDto> pagingByPriceWithCreatedDate(Double price, int page, int size) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "createdDate");
+        Pageable pageable = PageRequest.of(page - 1, size, sort);
+
+        Page<CourseEntity> page1 = courseRepository.findAllByPrice(price, pageable);
+        Long totalCount = page1.getTotalElements();
+        List<CourseEntity> entityList = page1.getContent();
+        List<CourseDto> dtoList = new LinkedList<>();
+
+        for (CourseEntity entity : entityList) {
+            CourseDto dto = new CourseDto();
+            dto.setId(entity.getId());
+            dto.setName(entity.getName());
+            dto.setPrice(entity.getPrice());
+            dto.setDuration(entity.getDuration());
+            dto.setCreatedDate(entity.getCreatedDate());
+            dtoList.add(dto);
+        }
+        Page<CourseDto> response = new PageImpl<CourseDto>(dtoList, pageable, totalCount);
+        return response;
+    }
+
+    /*public Page<CourseDto> pagingByPricesWithCreateDateBetween(LocalDate date1, LocalDate date2, int page, int size) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "createdDate");
+        Pageable pageable = PageRequest.of(page - 1, size, sort);
+        Pageable pageable1 = PageRequest.of(page - 1, size, sort);
+
+        Page<CourseEntity> page1 = courseRepository.findByCreatedDateBetween(date1, date2, pageable, pageable1);
+        Long totalCount = page1.getTotalElements();
+        List<CourseEntity> entityList = page1.getContent();
+        List<CourseDto> dtoList = new LinkedList<>();
+
+    }*/
 }
 /*
 Student

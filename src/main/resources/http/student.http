@@ -68,3 +68,10 @@ Content-Type:  application/json
 {
   "name": ""
 }
+
+
+### Student paging by given level
+GET http://localhost:8080/student/paging-level/2
+
+### Student paging by given gender
+GET http://localhost:8080/student/paging-gender/MALE

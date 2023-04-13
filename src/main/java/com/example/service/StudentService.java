@@ -234,4 +234,28 @@ public class StudentService {
         Page<StudentDto> response = new PageImpl<StudentDto>(dtoList, paging, totalCount);
         return response;
     }
+
+    public Page<StudentDto> paginationWithGender(StudentGender gender, int page, int size) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "birthDate");
+        Pageable paging = PageRequest.of(page - 1, size, sort);
+
+        Page<StudentEntity> pageObj = studentRepository.findAllByGender(gender, paging);
+        Long totalCount = pageObj.getTotalElements();
+        List<StudentEntity> entityList = pageObj.getContent();
+        List<StudentDto> dtoList = new LinkedList<>();
+        for (StudentEntity entity : entityList) {
+            StudentDto dto = new StudentDto();
+            dto.setId(entity.getId());
+            dto.setName(entity.getName());
+            dto.setSurname(entity.getSurname());
+            dto.setLevel(entity.getLevel());
+            dto.setAge(entity.getAge());
+            dto.setBirthDate(entity.getBirthDate());
+            dto.setGender(entity.getGender());
+            dtoList.add(dto);
+        }
+        Page<StudentDto> response = new PageImpl<StudentDto>(dtoList, paging, totalCount);
+        return response;
+
+    }
 }
