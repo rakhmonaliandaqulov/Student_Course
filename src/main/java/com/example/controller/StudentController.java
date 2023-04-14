@@ -131,5 +131,16 @@ public class StudentController {
         Page<StudentDto> response = studentService.paginationWithGender(filter.getGender(), page, size);
         return ResponseEntity.ok(response);
     }
+    @GetMapping(value = "/test")
+    public ResponseEntity<?> test() {
+//        studentService.pagination(1, 2);
+        studentService.test3();
+        return ResponseEntity.ok().build();
+    }
+    @PostMapping(value = "/filter")
+    public ResponseEntity<?> filter(@RequestBody StudentFilterRequestDto filterDTO) {
+        studentService.filter(filterDTO);
+        return ResponseEntity.ok().build();
+    }
 
 }

@@ -98,3 +98,12 @@ Content-Type:  application/json
 {
   "gender": "FEMALE"
 }
+
+### Student filter
+POST localhost:8080/student/filter
+Content-Type: application/json
+
+{
+  "name": "alish",
+  "surname": "Aliyev"
+}
