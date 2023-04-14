@@ -40,6 +40,30 @@ public class StudentCustomRepository {
             builder.append(" and s.surname = :surname");
             params.put("surname", filterDTO.getSurname());
         }
+        if (filterDTO.getAge() != null) {
+            builder.append(" and s.age = :age");
+            params.put("age", filterDTO.getAge());
+        }
+        if (filterDTO.getLevel() != null) {
+            builder.append(" and s.level = :level");
+            params.put("level", filterDTO.getLevel());
+        }
+        if (filterDTO.getGender() != null) {
+            builder.append(" and s.gender = :gender");
+            params.put("gender", filterDTO.getGender());
+        }
+        if (filterDTO.getBirthDate() != null) {
+            builder.append(" and s.birth_date = :birth_date");
+            params.put("birth_date", filterDTO.getBirthDate());
+        }
+        if (filterDTO.getBirthDate() != null) {
+            builder.append(" and s.birth_date = :birth_date");
+            params.put("birth_date", filterDTO.getBirthDate());
+        }
+        if (filterDTO.getDateFrom() != null) {
+            builder.append(" and s. = :birth_date"); //TODO
+            params.put("birth_date", filterDTO.getBirthDate());
+        }
         // ....
         Query query = this.entityManager.createQuery(builder.toString());
         for (Map.Entry<String, Object> param : params.entrySet()) {
